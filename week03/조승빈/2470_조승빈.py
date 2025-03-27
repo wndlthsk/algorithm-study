@@ -2,7 +2,7 @@ N = int(input())
 arr = []
 
 arr = list(map(int,input().split(" ")))
-
+arr = sorted(arr)
 low = 0
 high = N-1
 a = arr[low]
@@ -18,8 +18,6 @@ while low < high:
     elif arr[low] + arr[high] > 0:
         high -=1
     else:
-        a = arr[low]
-        b = arr[high]
         break
 print(a,end=" ")
 print(b)
