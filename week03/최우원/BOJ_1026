@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int n;
+int A[55], B[55];
+
+bool cmp(int a, int b){
+    return a > b; // 내림차순
+}
+
+/* 
+bool cmp(int a, int b){
+    if( a > b) true
+    else false    
+}
+    이거 잘못된거임임
+*/
+
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    cin >> n;
+    for(int i = 0; i < n; i++) cin >> A[i];
+    for(int i = 0; i < n; i++) cin >> B[i];
+
+    sort(A, A + n);       // 오름차순
+    sort(B, B + n, cmp);  // 내림차순
+        // 그냥 sort 해서 B[n-1-i]랑 A[i]랑 곱해줘도됨.
+
+    int total = 0;
+    for(int i = 0; i < n; i++)
+        total += A[i] * B[i];
+
+    cout << total;
+}
