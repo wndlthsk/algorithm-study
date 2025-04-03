@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isused1[40]; // 열체크
+bool isused2[40]; // 오른쪽 대각선 체크
+bool isused3[40]; // 왼쪽 대각선 체크  // 행은 어차피 안 봐도됨.
+
+int cnt;
+int n;
+
+void func(int row){
+    
+    if(row == n){
+        cnt++;
+        return;
+    }
+
+    
+    for(int i = 0; i < n; i++){
+        if(isused1[i] || isused2[row + i] || isused3[row - i + n-1] ) continue;
+        
+        isused1[i] = isused2[row + i] = isused3[row - i + n-1]  = true;
+        func(row+1);
+        
+        isused1[i] = isused2[row + i] = isused3[row - i + n-1]  = false;
+    }
+
+
+
+}
+
+
+int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cin >> n;
+    func(0);
+    cout << cnt << '\n'; 
+
+}
