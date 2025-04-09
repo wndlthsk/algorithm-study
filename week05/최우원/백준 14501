@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int n;
+int T[16], P[16];  // 최대 15일까지
+int maxProfit = 0;
+
+void dfs(int day, int sum) {
+    if (day > n) return;  // 퇴사일 초과 → 불가능한 경로
+
+    maxProfit = max(maxProfit, sum);  // 가능한 경로 중 최대 이익 저장
+
+    for (int i = day; i <= n; ++i) {
+        if (i + T[i] - 1 <= n) {  // 상담 가능하면
+            dfs(i + T[i], sum + P[i]);  // 상담하고, 다음 가능한 날짜로
+        }
+    }
+}
+
+int main() {
+    cin >> n;
+    for (int i = 1; i <= n; ++i) {
+        cin >> T[i] >> P[i];
+    }
+
+    dfs(1, 0);  // 1일차부터 시작
+    cout << maxProfit << '\n';
+    return 0;
+}
