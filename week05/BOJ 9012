@@ -1,0 +1,35 @@
+//BOJ9012
+#include <bits/stdc++.h>
+using namespace std;
+
+map <char,char> mem = {
+    {')','('},
+    {'}','{'},
+    {']','['}
+};
+int n;
+
+bool func(string str){
+    stack<char> s;  // 스택을 함수 내부에서 선언 (테스트 케이스마다 초기화)
+    for(int i = 0; i < str.size(); i++){
+        if( mem.count(str[i]) ){
+            if(s.empty() || s.top() != mem[str[i]])
+            return false;
+            else s.pop();
+            
+        }
+        else s.push(str[i]);
+    }
+    return s.empty();
+}
+
+int main(){
+    string str;
+    cin >> n;
+    for(int i = 0; i < n;i++){
+        cin >> str;
+        if(func(str)) cout << "true";
+        else cout <<"false";
+    }
+    return 0;
+}
