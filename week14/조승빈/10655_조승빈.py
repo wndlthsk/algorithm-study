@@ -1,19 +1,3 @@
-# N = int(input())
-# points = [tuple(map(int, input().split())) for _ in range(N)]
-
-
-
-# total = sum(manhattan(points[i], points[i + 1]) for i in range(N - 1))
-# min_dist = float('inf')
-
-# for i in range(1, N - 1):
-#     skip = manhattan(points[i - 1], points[i]) + manhattan(points[i], points[i + 1])
-#     direct = manhattan(points[i - 1], points[i + 1])
-#     min_dist = min(min_dist, total - skip + direct)
-
-#print(min_dist)
-
-
 n = int(input())
 arr = []
 def get_distance(a, b):
