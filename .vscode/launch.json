@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/joseungbin/Desktop/강아지/algorithm-study/week03/6198",
+      "program": "/Users/joseungbin/Desktop/강아지/algorithm-study/week03/6198/build/Debug/outDebug"
+    }
+  ]
+}
