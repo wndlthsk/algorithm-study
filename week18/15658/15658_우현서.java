@@ -1,72 +1,67 @@
-// 암호: 서로 다른 L개의 알파벳 소문자, 최소 한개의 모음, 최소 두개의 자음
-// + 사전 순 정렬
-// 문자의 종류 c가지
-// 3 ≤ L ≤ C ≤ 15
+// 수열 A (n개 수로 이루어짐)
+// 연산자 : +, -, *, / 개수는 n-1보다 많을 수도 있다.
+// 모든 수 사이에 연산자 한개를 끼워야한다. 모든 연산자를 사용안해도 됨
+// 주어진 수의 순서를 바꾸면 안된다
+// 연산자 우선순위 무시하고 앞에서부터 계싼함
+// 나눗셈은 몫만 취한다.
+// 만들 수 있는 식의 결과의 최대, 최소 구하기
 
-// 입력받은 문자를 사전순 정렬 후, 넣었다빼면서 개수가 l개가 되면 후보에 넣는다.
-// -> 백트래킹 사용
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
-    static List<String> result;
-    static int l, c;
-    static String[] chars;
+    static int n;
+    static int[] a, operator;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        l = Integer.parseInt(st.nextToken());
-        c = Integer.parseInt(st.nextToken());
+        a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = Integer.parseInt(st.nextToken());
+        }
         st = new StringTokenizer(br.readLine());
-        chars = new String[c];
-        for (int i = 0; i < c; i++) {
-            chars[i] = st.nextToken();
+        operator = new int[4];
+        for (int i=0; i<4; i++) {
+            operator[i] = Integer.parseInt(st.nextToken());
         }
-//        System.out.println(Arrays.toString(chars));
-        Arrays.sort(chars);
+//        System.out.println(Arrays.toString(operator));
+//        System.out.println(Arrays.toString(a));
 
-        result = new ArrayList<>();
-        backtrack(new ArrayList<>(), 0);
-//        System.out.println(result);
-        for (String s: result) {
-            System.out.println(s);
-        }
+        backtrack(1, a[0]);
+        System.out.println(max);
+        System.out.println(min);
+
     }
+    static int max = Integer.MIN_VALUE;
+    static int min = Integer.MAX_VALUE;
+    static public void backtrack(int count, int current) { // (사용한 숫자, 현재까지 계산 값)
+        if (count == n) {
+            max = Math.max(max, current);
+            min = Math.min(min, current);
+            return;
+        }
 
-    public static void backtrack(List<String> cur, int start) {
-        if (cur.size() == l) {
-            // 최소 한개의 모음, 최소 두개의 자음 조건 확인
-            int vCount = 0; // 모음 카운트
-            int cCount = 0; // 자음 카운트
-
-            for (String s: cur) {
-                if (isVowel(s)) {
-                    vCount++;
+        for (int i=0; i<4; i++) {
+            if (operator[i] > 0) {
+                operator[i]--;
+                int next = 0;
+                if (i == 0) {
+                    next = current + a[count];
+                } else if (i == 1) {
+                    next = current - a[count];
+                } else if (i == 2) {
+                    next = current * a[count];
                 } else {
-                    cCount++;
+                    next = current / a[count];
                 }
-            }
-
-            if (vCount >= 1 && cCount >= 2) {
-                result.add(String.join("", cur));
+                backtrack(count+1, next);
+                operator[i]++;
             }
         }
-
-        for (int i=start; i<c; i++) {
-            cur.add(chars[i]);
-            backtrack(cur, i+1);
-            cur.remove(cur.size()-1);
-        }
-    }
-
-    public static boolean isVowel(String s) {
-        return s.equals("a") || s.equals("e") || s.equals("i") || s.equals("o") || s.equals("u");
     }
 }
