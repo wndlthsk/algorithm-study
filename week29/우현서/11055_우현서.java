@@ -1,3 +1,5 @@
+package week29.우현서;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
