@@ -1,16 +1,14 @@
-N, binary = map(int, input().split())
+N, B = map(int, input().split())
 
 p = 1
-while binary ** p < N:
+while B ** p <= N:
   p += 1
 
 res = []
-for i in range(p, 0, -1):
-  cnt = 0
-  if N >= binary ** (i - 1):
-    N -= binary ** i
-    cnt += 1
+for i in range(p - 1, -1, -1):  # (p-1)자리부터 0자리까지
+  cnt = N // (B ** i)       # 현재 자리의 값
+  N %= B ** i               # 남은 값 갱신
   res.append(cnt)
 
-r = [ascii(107 - x) if x >= 10 else x for x in res]
-print(r, sep='')
+r = [chr(55 + x) if x >= 10 else x for x in res]
+print(*r, sep='')
