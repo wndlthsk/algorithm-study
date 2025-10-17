@@ -1,3 +1,5 @@
+package week31.우현서;
+
 class Solution {
     public String solution(String s) {
         String[] splited = s.split(" ");

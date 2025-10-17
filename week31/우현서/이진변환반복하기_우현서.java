@@ -1,3 +1,5 @@
+package week31.우현서;
+
 class Solution {
     public int[] solution(String s) {
         int countChange = 0;
