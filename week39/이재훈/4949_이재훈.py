@@ -1,7 +1,7 @@
 import sys
 
 for line in sys.stdin:
-  if line.strip() == '.':
+  if line.rstrip() == '.':
     break
 
   stk = []
