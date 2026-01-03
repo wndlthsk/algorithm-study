@@ -1,6 +1,6 @@
 N = int(input())
 M = int(input())
-broken = list(map(int, input().split()))
+broken = list(map(int, input().split())) if M > 0 else []
 
 move = abs(100 - N)
 
