@@ -9,49 +9,34 @@ import java.util.Map;
 
 class Solution {
     public String[] solution(String[] record) {
-        String[] answer = {};
         Map<String, String> nickname = new HashMap<>();
         List<String[]> state = new ArrayList<>();
 
-        int countChange = 0;
         for (String r: record) {
             String[] splited = r.split(" ");
-            String[] toAdd = new String[2];
+            String action = splited[0];
+            String id = splited[1];
 
-            if (splited[0].equals("Enter")) {
-                toAdd[0] = "E";
-                nickname.put(splited[1], splited[2]);
+            if (action.equals("Enter")) {
+                nickname.put(id, splited[2]);
+                state.add(new String[]{"E", id});
             }
-            else if (splited[0].equals("Leave")) {
-                toAdd[0] = "L";
+            else if (action.equals("Leave")) {
+                state.add(new String[]{"L", id});
             }
             else {
-                toAdd[0] = "C";
-                countChange++;
-                nickname.put(splited[1], splited[2]);
+                nickname.put(id, splited[2]);
             }
-
-            toAdd[1] = splited[1];
-
-            state.add(toAdd);
         }
 
-        String[] result = new String[state.size()-countChange];
+        String[] result = new String[state.size()];
 
-        int i = 0;
-        for (String[] s : state) {
-            if (s[0].equals("C")) continue;
+        for (int i=0; i<state.size(); i++) {
+            String[] log = state.get(i);
+            String action = log[0];
+            String id = log[1];
 
-            String id = s[1];
-
-            if (s[0].equals("E")) {
-                result[i] = nickname.get(id) + "님이 들어왔습니다.";
-            }
-            else if (s[0].equals("L")) {
-                result[i] = nickname.get(id) + "님이 나갔습니다.";
-            }
-
-            i++;
+            result[i] = nickname.get(id) + (action.equals("E") ? "님이 들어왔습니다." : "님이 나갔습니다.");
         }
 
         return result;
