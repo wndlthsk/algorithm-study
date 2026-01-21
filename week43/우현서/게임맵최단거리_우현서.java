@@ -1,0 +1,45 @@
+// 1,1 -> 5,5
+// 4방향 이동, 흰곳만(1)
+// 지나야하는 최소 칸 개수, 도착할 수 없으면 -1
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+class Solution {
+    public int solution(int[][] maps) {
+        int n = maps.length;
+        int m = maps[0].length;
+
+        Queue<int[]> queue = new ArrayDeque<>();
+        boolean[][] visited = new boolean[n][m];
+        queue.add(new int[]{0, 0, 1});
+        visited[0][0] = true;
+
+        int[] dx = {-1, 1, 0, 0};
+        int[] dy = {0, 0, -1, 1};
+
+        int result = -1;
+
+        while (!queue.isEmpty()) {
+            int[] now = queue.poll();
+
+            if (now[0] == n-1 && now[1] == m-1) {
+                result = now[2];
+                break;
+            }
+
+            for (int d=0; d<4; d++) {
+                int nx = now[0] + dx[d];
+                int ny = now[1] + dy[d];
+
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+                if (visited[nx][ny] || maps[nx][ny] == 0) continue;
+
+                queue.add(new int[]{nx, ny, now[2] + 1});
+                visited[nx][ny] = true;
+            }
+        }
+
+
+        return result;
+    }
+}
