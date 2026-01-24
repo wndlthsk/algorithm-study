@@ -11,9 +11,6 @@
 // 왜 백트래킹?  --> 선택의 조합을 전부 비교해야 하는 구조. 각 점수를 먹을지 말지의 조합
 // 각 점수를 라이언이 먹엇다고 가정하고 점수 차 큰것을 후보로 저장, 후보 중 낮은 점수 많은 거 구해
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
     int N;
     int[] apeach;
@@ -22,52 +19,33 @@ class Solution {
         N = n;
         apeach = info.clone();
 
-        backtrack(0, 0, new int[11]);
-        // System.out.println(maxDiff);
+        backtrack(0, 0, 0, 0);
 
-        // for (int[] c: candidates) {
-        //     System.out.println(Arrays.toString(c));
-        // }
-
-
-        int size = candidates.size();
-        if (size == 0) return new int[]{-1};
-        else if (size == 1) return candidates.get(0);
-        else { // 후보중 베스트 구하기
-            int[] best = candidates.get(0);
-
-            for (int i=1; i<size; i++) {
-                int[] now = candidates.get(i);
-
-                for (int j=10; j>=0; j--) {
-                    if (best[j] < now[j]) {
-                        best = now;
-                        break;
-                    } else if (best[j] > now[j]) {
-                        break;
-                    }
-                }
-            }
-
-            return best;
-        }
+        if (maxDiff == 0) return new int[]{-1};
+        else return result;
     }
 
     int maxDiff = 0;
-    List<int[]> candidates = new ArrayList<>();
+    int[] result = new int[11];
+    int[] ryan = new int[11];
 
 
-    public void backtrack(int score, int usedArrows, int[] lion) {
-        if (score >= 11) {
-            lion[10] += N - usedArrows;
-            calcDiff(lion);
-            lion[10] -= N - usedArrows;
+    public void backtrack(int score, int usedArrows, int ryanScore, int apeachScore) {
+        if (score == 11) {
+            if (usedArrows < N) ryan[10] += N - usedArrows;
+            calcDiff(ryanScore, apeachScore);
+            if (usedArrows < N) ryan[10] -= N - usedArrows;
 
             return;
         }
 
+        // 이미 화살 다썼으면 가지치기 & 남은 점수들 중 어피치가 쏜 게 있으면 점수 더하기
         if (usedArrows == N) {
-            calcDiff(lion);
+            for (int s=score; s<11; s++) {
+                if (apeach[10-s] > 0) apeachScore += s;
+            }
+            calcDiff(ryanScore, apeachScore);
+
             return;
         }
 
@@ -75,30 +53,35 @@ class Solution {
 
         // 현재 점수 먹기
         if (needArrows <= N - usedArrows) {
-            lion[10-score] = needArrows;
-            backtrack(score+1, usedArrows + needArrows, lion);
-            lion[10-score] = 0;
+            ryan[10-score] = needArrows;
+            backtrack(score+1, usedArrows + needArrows, ryanScore + score, apeachScore);
+            ryan[10-score] = 0;
         }
 
         // 현재 점수 포기
-        backtrack(score+1, usedArrows, lion);
+        int apeachNextScore = apeachScore;
+        if (apeach[10-score] > 0) apeachNextScore += score;
+        backtrack(score+1, usedArrows, ryanScore, apeachNextScore);
     }
 
-    private void calcDiff(int[] lion) {
-        int diff = 0;
-        for (int i=0; i<11; i++) {
-            if (lion[i] > apeach[i]) diff += 10-i;
-            else if (apeach[i] > 0) diff -= 10-i;
-        }
-
+    private void calcDiff(int ryanScore, int apeachScore) {
+        int diff = ryanScore - apeachScore;
         if (diff <= 0) return;
 
         if (diff > maxDiff) {
-            candidates.clear();
-            candidates.add(lion.clone());
             maxDiff = diff;
+            result = ryan.clone();
         } else if (diff == maxDiff) {
-            candidates.add(lion.clone());
+            if (isBetter()) result = ryan.clone();
         }
+    }
+
+    private boolean isBetter() {
+        for (int i=10; i>=0; i--) {
+            if (result[i] < ryan[i]) return true;
+            else if (result[i] > ryan[i]) return false;
+        }
+
+        return false;
     }
 }
