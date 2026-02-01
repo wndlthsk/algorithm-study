@@ -1,18 +1,17 @@
 X = int(input())
 
-cross_sum = 0
-line = 0
+step = 1
+while step * (step + 1) // 2 < X:
+  step += 1
 
-while X > cross_sum:
-  line += 1
-  cross_sum += line
+base_seq = (step - 1) * step // 2
+offset = X - (base_seq + 1)
 
-idx = cross_sum - X
-
-if line % 2 == 0:
-  top = line - idx
-  bottom = 1 + idx
+bottom, top = 0, 0
+if step % 2 == 0:
+  top = 1 + offset
+  bottom = step - offset
 else:
-  top = 1 + idx
-  bottom = line - idx
+  top = step - offset
+  bottom = 1 + offset
 print(f"{top}/{bottom}")

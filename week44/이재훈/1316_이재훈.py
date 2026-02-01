@@ -1,21 +1,17 @@
-import sys
-input = sys.stdin.readline
-
 N = int(input())
-cnt = 0
 
+def is_group_word(word):
+  chunks = []
+  for ch in word:
+    if chunks:
+      if chunks[-1] != ch and ch in chunks:
+        return False
+    chunks.append(ch)
+  return True
+
+cnt = 0
 for _ in range(N):
-  line = input().rstrip()
-  seen = set()
-  prev = ''
-  is_group = True
-  for ch in line:
-    if ch != prev:
-      if ch in seen:
-        is_group = False
-        break
-      seen.add(ch)
-    prev = ch
-  if is_group:
+  word = input()
+  if is_group_word(word):
     cnt += 1
 print(cnt)

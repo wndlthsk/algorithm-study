@@ -1,18 +1,15 @@
-from collections import Counter
-import sys
-input = sys.stdin.readline
+N = int(input())
+Ai = list(map(int, input().split()))
 
-n = int(input())
-lst = list(map(int, input().split()))
+d = {}
+for x in Ai:
+  d[x] = d.get(x, 0) + 1
 
-freq = Counter(lst)
-stk = []
-res = [-1] * n
-for i in range(n - 1, -1, -1):
-  current = lst[i]
-  while stk and freq[stk[-1]] <= freq[current]:
-    stk.pop()
-  if stk:
-    res[i] = stk[-1]
-  stk.append(current)
-print(' '.join(map(str, res)))
+res = [-1] * N
+stk = [] # 인덱스 스택
+for idx in range(N):
+  while stk and d[Ai[idx]] > d[Ai[stk[-1]]]:
+    top = stk.pop()
+    res[top] = Ai[idx]
+  stk.append(idx)
+print(*res)
