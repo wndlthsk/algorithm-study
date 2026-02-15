@@ -1,11 +1,9 @@
 N = int(input())
 
-danced = {"ChongChong"}
-
+danced = set(["ChongChong"])
 for _ in range(N):
-  a, b = input().split()
-  # 둘 중 하나라도 이미 춤을 추고 있었다면
-  if a in danced or b in danced:
-    danced.add(a)
-    danced.add(b)
+  A, B = input().split()
+  if A in danced or B in danced:
+    danced.add(A)
+    danced.add(B)
 print(len(danced))

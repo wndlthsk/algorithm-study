@@ -1,13 +1,12 @@
-import sys
+ROW_LEN = 5
 
-words = []
-for line in sys.stdin:
-  words.append(list(line.strip()))
+words = [input() for _ in range(ROW_LEN)]
 
-max_len = max(len(w) for w in words)
+max_col_len = max(len(w) for w in words)
+
 res = []
-for i in range(max_len):          # 열 기준
-  for j in range(len(words)):     # 행 순회
-    if i < len(words[j]):         # 해당 열이 존재하면
-      res.append(words[j][i])
+for col in range(max_col_len):
+  for row in range(ROW_LEN):
+    if col < len(words[row]):
+      res.append(words[row][col])
 print(''.join(res))
