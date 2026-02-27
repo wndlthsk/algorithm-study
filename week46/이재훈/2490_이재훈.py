@@ -1,14 +1,13 @@
+d = {
+  0: 'E',
+  1: 'A',
+  2: 'B',
+  3: 'C',
+  4: 'D',
+}
+
 for _ in range(3):
-  arr = list(map(int, input().split()))
-  zero = arr.count(0)
+  play_res = list(map(int, input().split()))
   
-  if zero == 0:
-    print("E")
-  elif zero == 1:
-    print("A")
-  elif zero == 2:
-    print("B")
-  elif zero == 3:
-    print("C")
-  else:
-    print("D")
+  cnt_zero = play_res.count(0)
+  print(d[cnt_zero])

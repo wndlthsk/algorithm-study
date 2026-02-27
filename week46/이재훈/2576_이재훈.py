@@ -1,8 +1,11 @@
-nums = [int(input()) for _ in range(7)]
-odds = [x for x in nums if x % 2 == 1]
+odds = []
+for _ in range(7):
+  digit = int(input())
+  if digit % 2 != 0:
+    odds.append(digit)
 
-if not odds:
-  print(-1)
-else:
+if odds:
   print(sum(odds))
   print(min(odds))
+else:
+  print(-1)
