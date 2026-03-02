@@ -1,8 +1,12 @@
 A, B = map(int, input().split())
 
-arr = []
-num = 1
-while len(arr) < B:
-  arr.extend([num] * num)
-  num += 1
-print(sum(arr[A-1:B]))
+step = 1
+cnt = 0
+seq = []
+while len(seq) < B:
+  if cnt >= step:
+    cnt = 0
+    step += 1
+  seq.append(step)
+  cnt += 1
+print(sum(seq[A-1:B]))

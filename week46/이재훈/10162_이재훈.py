@@ -1,13 +1,15 @@
 T = int(input())
 
-buttons = [300, 60, 10]
-counts = [0, 0, 0]
+A = 300
+B = 60
+C = 10
 
-for i in range(3):
-  counts[i] = T // buttons[i]
-  T %= buttons[i]
+a = T // A
+b = (T % A) // B
+c = ((T % A) % B) // C
 
-if T != 0:
+if ((T % A) % B) % C != 0:
   print(-1)
+  exit(0)
 else:
-  print(*counts)
+  print(a, b, c)

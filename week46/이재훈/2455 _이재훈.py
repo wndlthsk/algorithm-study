@@ -1,10 +1,10 @@
-max_people = 0
-current = 0
-
+max_p = float('-inf')
+people = 0
 for _ in range(4):
-  out_people, in_people = map(int, input().split())
-  current -= out_people
-  current += in_people
-  max_people = max(max_people, current)
-
-print(max_people)
+  out, ride = map(int, input().split())
+  people -= out
+  people += ride
+  
+  if max_p < people:
+    max_p = people
+print(max_p)
