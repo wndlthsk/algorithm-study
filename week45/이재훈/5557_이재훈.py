@@ -2,8 +2,8 @@ N = int(input())
 numbers = list(map(int, input().split()))
 
 MAX = 20
-dp = [[0] * (MAX + 1) for _ in range(N)]
-dp[0][numbers[0]] = 1 # dp[i][v]: i번째 숫자까지 사용해서, 값 v를 만들 수 있는 경우의 수
+dp = [[0] * (MAX + 1) for _ in range(N)]  # dp[i][v]: i번째 숫자까지 사용해서, 값 v를 만들 수 있는 경우의 수
+dp[0][numbers[0]] = 1
 
 for i in range(1, N - 1):
   for v in range(MAX + 1):

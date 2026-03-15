@@ -1,16 +1,14 @@
-toA, toB = map(int, input().split())
+A, B = map(int, input().split())
 m = int(input())
-nums_from_A = list(map(int, input().split()))
+baseA = list(map(int, input().split()))
 
-digit = 0
-for idx, v in enumerate(nums_from_A[::-1]):
-  digit += v * (toA ** idx)
+total = 0
+for digit in baseA:
+  total = total * A + digit
 
 res = []
-if digit == 0:
-  res.append(0)
-else:
-  while digit > 0:
-    res.append(digit % toB)
-    digit //= toB
-print(' '.join(map(str, res[::-1])))
+while total > 0:
+  digit = total % B
+  total //= B
+  res.append(digit)
+print(*res[::-1])
