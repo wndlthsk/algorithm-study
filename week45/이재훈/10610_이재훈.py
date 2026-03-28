@@ -1,14 +1,16 @@
-import sys
-input = sys.stdin.readline
+N = input()
+digits = list(map(int, N))
 
-N = input().strip()
-digits = list(N)
-
-srt = sorted(digits, reverse=True)
-
-total = sum(map(int, srt))
-
-if '0' not in srt or total % 3 != 0:
+# 조건1: 0이 존재해야 한다 → 10의 배수
+if 0 not in digits:
   print(-1)
-else:
-  print(''.join(srt))
+  exit()
+
+# 조건2: 자리수 합이 3으로 나누어 떨어져야 한다 → 3의 배수
+if sum(digits) % 3 != 0:
+  print(-1)
+  exit()
+
+# 3*10 배수인 경우, 가장 큰 수 만들어 출력
+srt = sorted(digits, reverse=True)
+print(''.join(map(str, srt)))
