@@ -1,4 +1,3 @@
-# 14935 FA
 s = input().strip()
 
 visited = set()
