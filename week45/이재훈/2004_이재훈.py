@@ -1,36 +1,15 @@
-import sys
-input = sys.stdin.readline
-
 n, m = map(int, input().split())
+if n - m < m:
+  m = n - m
 
-def count_five(x):
+def count_term(base, number):
   cnt = 0
-  while x > 0:
-    x //= 5
-    cnt += x
+  while base >= number:
+    cnt += base // number
+    base //= number
   return cnt
 
-def count_two(x):
-  cnt = 0
-  while x > 0:
-    x //= 2
-    cnt += x
-  return cnt
+two = count_term(n, 2) - count_term(m, 2) - count_term(n - m, 2)
+five = count_term(n, 5) - count_term(m, 5) - count_term(n - m, 5)
 
-# n! 안의 5 개수
-five_n = count_five(n)
-# m! 안의 5 개수
-five_m = count_five(m)
-# (n-m)! 안의 5 개수
-five_nm = count_five(n - m)
-
-# 조합에서의 5 개수
-five_cnt = five_n - five_m - five_nm
-
-two_n = count_two(n)
-two_m = count_two(m)
-two_nm = count_two(n - m)
-
-two_cnt = two_n - two_m - two_nm
-
-print(min(two_cnt, five_cnt))
+print(min(two, five))
