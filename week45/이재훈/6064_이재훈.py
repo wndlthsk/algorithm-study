@@ -1,16 +1,17 @@
+import math
+
 T = int(input())
 for _ in range(T):
   M, N, x, y = map(int, input().split())
   
-  is_valid = False
-  k = x
-  
-  while k <= M * N:
-    if (k - 1) % N + 1 == y:
-      print(k)
-      is_valid = True
+  limit = math.lcm(M, N)
+  year = x
+  while year <= limit:
+    cur_y = (year - 1) % N + 1
+    if cur_y == y:
+      print(year)
       break
-    k += M
+    year += M
   
-  if not is_valid:
+  if year > limit:
     print(-1)
