@@ -1,15 +1,17 @@
-import sys
-input = sys.stdin.readline
-
 N = int(input())
-
 if N == 0:
   print(0)
-else:
-  res = ""
-  while N != 0:
-    remainder = N % 2
-    res = str(remainder) + res
-    N = (N - remainder) // -2
+  exit()
 
-  print(res)
+res = []
+while N != 0:
+  digit = N % -2
+  N //= -2
+  
+  if digit < 0:
+    digit += 2
+    N += 1
+  
+  res.append(str(digit))
+
+print(''.join(reversed(res)))

@@ -1,12 +1,10 @@
-colors = set()
+f_body, f_tail = input().split()
+m_body, m_tail = input().split()
 
-for _ in range(2):
-  a, b = input().split()
-  colors.add(a)
-  colors.add(b)
+s = set([f_body, f_tail, m_body, m_tail])
 
-colors = sorted(colors)
+srt = sorted(s)
 
-for c1 in colors:
-  for c2 in colors:
-    print(c1, c2)
+for body in srt:
+  for tail in srt:
+    print(body, tail)
