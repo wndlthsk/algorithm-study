@@ -1,27 +1,24 @@
 def solution(polynomial):
-    terms = polynomial.split(' + ')
+    poly = polynomial.split(' + ')
     
-    x_sum = 0
-    const_sum = 0
-    
-    for term in terms:
-        if 'x' in term:
-            if term == 'x':
-                x_sum += 1
-            else:
-                x_sum += int(term[:-1])
+    first = 0
+    second = 0
+    for x in poly:
+        if 'x' in x:
+            f = x.rstrip('x')
+            first += int(1 if f == '' else f)
         else:
-            const_sum += int(term)
+            second += int(x)
     
-    result = []
+    res = ""
+    if first == 1:
+        first = ''
     
-    if x_sum:
-        if x_sum == 1:
-            result.append('x')
-        else:
-            result.append(f'{x_sum}x')
+    if first != 0 and second == 0:
+        res = f"{first}x"
+    elif first == 0 and second != 0:
+        res = f"{second}"
+    else:
+        res = f"{first}x + {second}"
     
-    if const_sum:
-        result.append(str(const_sum))
-    
-    return ' + '.join(result)
+    return res
