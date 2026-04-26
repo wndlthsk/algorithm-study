@@ -1,16 +1,19 @@
 def solution(keyinput, board):
-    x, y = 0, 0
-    max_x = board[0] // 2
-    max_y = board[1] // 2
+    max_x, max_y = board[0], board[1]
+    X_OFFSET = max_x // 2
+    Y_OFFSET = max_y // 2
     
-    for key in keyinput:
-        if key == "left" and x > -max_x:
-            x -= 1
-        elif key == "right" and x < max_x:
-            x += 1
-        elif key == "up" and y < max_y:
-            y += 1
-        elif key == "down" and y > -max_y:
-            y -= 1
+    DIR = {
+        "left": [-1, 0], "right": [1, 0],
+        "up": [0, 1], "down": [0, -1]
+    }
     
-    return [x, y]
+    cur_x, cur_y = X_OFFSET, Y_OFFSET
+    for cmd in keyinput:
+        dx, dy = DIR[cmd]
+        if 0 <= cur_x + dx < max_x:
+            cur_x += dx
+        if 0 <= cur_y + dy < max_y:
+            cur_y += dy
+    
+    return [cur_x - X_OFFSET, cur_y - Y_OFFSET]
