@@ -1,15 +1,21 @@
 def solution(score):
-    avg = [(i, (a + b) / 2) for i, (a, b) in enumerate(score)]
-    avg.sort(key=lambda x: -x[1])
+    avg_score = []
+    for x in score:
+        eng, math = x
+        avg = sum(x) / 2
+        avg_score.append(avg)
     
-    res = [0] * len(score)
-    rank = 1
+    d = {}
+    # {avg: avg_score 중 avg보다 높은 개수}
+    for avg in avg_score:
+        plus = 1
+        for x in avg_score:
+            if avg < x:
+                plus += 1
+        d[avg] = plus
     
-    for i in range(len(avg)):
-        if i > 0 and avg[i][1] == avg[i-1][1]:
-            res[avg[i][0]] = res[avg[i-1][0]]
-        else:
-            res[avg[i][0]] = rank
-        rank += 1
+    res = []
+    for x in avg_score:
+        res.append(d[x])
     
     return res

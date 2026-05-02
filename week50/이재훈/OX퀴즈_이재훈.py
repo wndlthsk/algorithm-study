@@ -1,13 +1,16 @@
 def solution(quiz):
-    answer = []
+    d = {
+        '+': lambda x, y: x + y,
+        '-': lambda x, y: x - y,
+    }
     
+    res = []
     for q in quiz:
-        a, op, b, _, c = q.split()
-        a, b, c = int(a), int(b), int(c)
-        
-        if op == '+':
-            answer.append("O" if a + b == c else "X")
+        x, op, y, _, z = q.split()
+        x, y, z = map(int, [x, y, z])
+        if d[op](x, y) == z:
+            res.append("O")            
         else:
-            answer.append("O" if a - b == c else "X")
+            res.append("X")
     
-    return answer
+    return res
