@@ -1,6 +1,5 @@
 def solution(lines):
-    answer = 0
-    
+    cm = 0
     for x in range(-100, 101):
         cnt = 0
         for s, e in lines:
@@ -8,6 +7,6 @@ def solution(lines):
                 cnt += 1
         
         if cnt >= 2:
-            answer += 1
+            cm += 1
     
-    return answer
+    return cm
