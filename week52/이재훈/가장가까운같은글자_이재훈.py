@@ -1,13 +1,12 @@
 def solution(s):
-    pos = {}
-    answer = []
-    
+    prev = [-1] * 26
+    res = []
     for i, ch in enumerate(s):
-        if ch in pos:
-            answer.append(i - pos[ch])
+        idx = ord(ch) - ord('a')
+        if prev[idx] != -1:
+            res.append(i - prev[idx])
         else:
-            answer.append(-1)
-        
-        pos[ch] = i
-    
-    return answer
+            res.append(-1)
+        prev[idx] = i
+
+    return res

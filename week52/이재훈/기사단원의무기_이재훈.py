@@ -1,19 +1,22 @@
 def solution(number, limit, power):
-    answer = 0
-
-    for num in range(1, number + 1):
-        count = 0
-
-        for i in range(1, int(num ** 0.5) + 1):
+    def get_cnt_divisor(num):
+        if num <= 1:
+            return 1
+        
+        cnt = 2
+        for i in range(2, int(num ** 0.5) + 1):
             if num % i == 0:
-                count += 1
-
-                if i != num // i:
-                    count += 1
-
-        if count > limit:
-            answer += power
-        else:
-            answer += count
-
-    return answer
+                if i == num // i:
+                    cnt += 1
+                else:
+                    cnt += 2
+        
+        return cnt
+    
+    cnts = [0] * number
+    for i in range(number):
+        cnts[i] = get_cnt_divisor(i+1)
+        if cnts[i] > limit:
+            cnts[i] = power
+    
+    return sum(cnts)

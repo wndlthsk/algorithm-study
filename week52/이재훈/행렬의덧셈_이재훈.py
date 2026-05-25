@@ -1,12 +1,9 @@
 def solution(arr1, arr2):
-    answer = []
-    
-    for i in range(len(arr1)):
+    res = []
+    for iter_a1, iter_a2 in zip(arr1, arr2):
         row = []
-        
-        for j in range(len(arr1[i])):
-            row.append(arr1[i][j] + arr2[i][j])
-        
-        answer.append(row)
+        for a1, a2 in zip(iter_a1, iter_a2):
+            row.append(a1 + a2)
+        res.append(row)
     
-    return answer
+    return res

@@ -1,9 +1,11 @@
 def solution(k, m, score):
-    score.sort(reverse=True)
+    box_cnt = len(score) // m
+    srt = sorted(score, reverse=True)
 
-    answer = 0
-
-    for i in range(m - 1, len(score), m):
-        answer += score[i] * m
-
-    return answer
+    res = 0
+    for idx in range(box_cnt):
+        s_idx = idx * m
+        part = srt[s_idx : s_idx+m]
+        res += part[-1] * m
+    
+    return res
