@@ -1,15 +1,17 @@
 def solution(s):
-    words = s.split(' ')
-    
-    for i in range(len(words)):
-        temp = ""
+    res = []
+    idx = 0
+    for ch in s:
+        if ch == ' ':
+            res.append(ch)
+            idx = 0
+            continue
+            
+        if idx % 2 == 0:
+            res.append(ch.upper())
+        else:
+            res.append(ch.lower())
         
-        for j in range(len(words[i])):
-            if j % 2 == 0:
-                temp += words[i][j].upper()
-            else:
-                temp += words[i][j].lower()
-                
-        words[i] = temp
+        idx += 1
         
-    return ' '.join(words)
+    return ''.join(res)

@@ -1,15 +1,11 @@
 def solution(d, budget):
-    d.sort()
+    srt = sorted(d)
     
     cnt = 0
-    total = 0
-    
-    for price in d:
-        total += price
-        
-        if total > budget:
-            break
-            
-        cnt += 1
+    acc = 0
+    for x in srt:
+        if acc + x <= budget:
+            acc += x
+            cnt += 1
     
     return cnt
