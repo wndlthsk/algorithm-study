@@ -1,3 +1,3 @@
 def solution(s):
-    l = list(map(int, s.split()))
-    return f"{min(l)} {max(l)}"
+    line = list(map(int, s.split()))
+    return f"{min(line)} {max(line)}"

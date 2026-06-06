@@ -1,8 +1,11 @@
 def solution(s):
-    words = s.split(" ")
-
-    for i in range(len(words)):
-        if words[i]:
-            words[i] = words[i][0].upper() + words[i][1:].lower()
-
-    return " ".join(words)
+    line = s.split(' ')
+    
+    res = []
+    for word in line:
+        if word:
+            res.append(word[0].upper() + word[1:].lower())
+        else:
+            res.append(word)
+    
+    return ' '.join(res)
