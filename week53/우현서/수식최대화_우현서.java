@@ -24,7 +24,7 @@ class Solution {
             }
         }
 
-        combination(new ArrayList<>());
+        permutation(new ArrayList<>());
         // System.out.println(candidates);
 
         String[] splited = expression.split("\\+|\\-|\\*");
@@ -47,7 +47,7 @@ class Solution {
     List<List<Character>> candidates = new ArrayList<>();
     Set<Character> visited = new HashSet<>();
 
-    private void combination(List<Character> now) {
+    private void permutation(List<Character> now) {
         if (now.size() == ops.size()) {
             candidates.add(new ArrayList<>(now));
             return;
@@ -58,7 +58,7 @@ class Solution {
 
             now.add(c);
             visited.add(c);
-            combination(now);
+            permutation(now);
             now.remove(now.size()-1);
             visited.remove(c);
         }
