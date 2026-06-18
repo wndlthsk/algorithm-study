@@ -1,7 +1,6 @@
 def solution(a, b):
-    answer = 0
+    res = 0
+    for x, y in zip(a, b):
+        res += x * y
     
-    for i in range(len(a)):
-        answer += a[i] * b[i]
-    
-    return answer
+    return res

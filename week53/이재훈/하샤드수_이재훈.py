@@ -1,3 +1,3 @@
 def solution(x):
-    total = sum(map(int, str(x)))
-    return x % total == 0
+    s = sum(map(int, list(str(x))))
+    return x % s == 0

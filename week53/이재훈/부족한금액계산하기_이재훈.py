@@ -1,7 +1,6 @@
 def solution(price, money, count):
-    total = 0
+    pay = 0
+    for i in range(1, count+1):
+        pay += price * i
     
-    for i in range(1, count + 1):
-        total += price * i
-    
-    return max(0, total - money)
+    return -(money - pay) if money - pay < 0 else 0
